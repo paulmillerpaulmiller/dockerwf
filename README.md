@@ -10,9 +10,9 @@ Linux is a clone of Unix.  In the Linux ecosystem, there is <a href="https://upl
 
 Docker solves package and library conflicts for Linux.  
 
-For a team of software developers, Docker ensures that every contributor has exactly the same packages and library versions as the rest of the team.  No one on the team can say "it works on my machine, I don't know why it doesn't work on yours".  
+For a team of software developers, using Docker ensures that every contributor has exactly the same packages and library versions as the rest of the team.  No one on the team can say "it works on my machine, I don't know why it doesn't work on yours".  
 
-Docker is also a way to deploy software applications with all dependency package versions under control. Docker is also a way to distribute components in the cloud.
+Docker is also a way to deploy software applications with all dependency package versions under control. Docker makes it easy to distribute components in the cloud, including CI build and run tests.
 
 
 
@@ -60,6 +60,12 @@ FROM ubuntu:24.04
 ARG ARG_USERID
 ARG ARG_USER
 
+# <Install Linux utilities>
+
+# <Install toolchains>
+
+# <Install libraries and middleware ...>
+
 # Add the user from the host
 RUN useradd -m $ARG_USER -u $ARG_USERID -s /bin/bash && \
     passwd -d $ARG_USER && \
@@ -69,6 +75,11 @@ CMD ["bash"]
 ```
 Command line to build the image.  Note the '.' at the end of the command line to indicate the context.  Typically you would run this command from the same directory that the Dockerfile exists in. 
 ```
+  DOCKERFILE="Dockerfile"
+  IMAGENAME="helloimage"
+  CONTAINERNAME="hellocontainer"
+  USERID=$(id -u)
+
   # This adds you as the user inside the container.
   docker build \
     -f "${DOCKERFILE}" \
@@ -90,7 +101,7 @@ Command line to build the image.  Note the '.' at the end of the command line to
     --user "${USER}" \
     -v "${HOME}/:${HOME}" \
     -v "${HOME}/.bashrc:${HOME}/.bashrc" \
-    -v "${HOME}/.bash_history:${HOME}/.bashrc_history" \
+    -v "${HOME}/.bash_history:${HOME}/.bash_history" \
     -v "${HOME}/.vimrc:${HOME}/.vimrc" \
     -v /etc/hosts:/etc/hosts \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -144,7 +155,6 @@ When a command or script is specified, run the command or script inside the cont
 
   docker rm "${CONTAINERNAME}" >/dev/null
 ```
-
 
 <br>
 
