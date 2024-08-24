@@ -12,7 +12,7 @@ Docker solves package and library conflicts for Linux.
 
 For a team of software developers, using Docker ensures that every contributor has exactly the same packages and library versions as the rest of the team.  No one on the team can say "it works on my machine, I don't know why it doesn't work on yours".  
 
-Docker is also a way to deploy software applications with all dependency package versions under control. Docker makes it easy to distribute components in the cloud, including CI build and run tests.
+Docker is also a way to deploy software applications with all dependency package versions under control. Using Docker makes it easy to distribute components in the cloud, including CI build and run tests.  Some docker-ized software applications may run persistently (indefinite life time e.g. a database server), other docker-ized software applications might be ephemeral (short life cycle e.g. unit tests and simulations).  
 
 
 
@@ -85,8 +85,7 @@ Command line to build the image.  Note the '.' at the end of the command line to
     -f "${DOCKERFILE}" \
     --build-arg ARG_USERID="${USERID}" \
     --build-arg ARG_USER="${USER}" \
-    -t "${IMAGENAME}" \
-    --target "${IMAGENAME}" .
+    -t "${IMAGENAME}" .
 ```
 
 <br>
